@@ -15,6 +15,7 @@ This directory must remain private at all times, accessible only to the student,
 Briefly describe how your code works and how to test it. This includes the required platform, compiler, libraries, build instructions, etc.
 
 Program Description:
+
 For this assignment, I decided to use python again because it's a very flexible language that's easy to read.
 I used an online IDE which runs on the cloud as oppose to running it on command line like I did for Assignment 1.
 The first thing I added was code that asks for user input, then runs that input through tests to see if it's in the right format.
