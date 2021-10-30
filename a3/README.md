@@ -22,6 +22,7 @@ evaluate the responses (responses are on the list at a numbered index; range fro
 General Things to consider with conditionals:
 The numbers followed by question marks are status codes with "?" as a regular expression inplace of any character.
 "*" - is any string of characters which is the message that follows the status code if there is one.
+
 5. Status codes of 200 is Ok; 300s is for redirects; 400s is client-side errors; 500s is server-side errors.
 6. The sendline methods are used to output messages or other forms of data from you (the client).
 7. Lastly, the "exit()" functions are just to end the currently running process (netcat).
