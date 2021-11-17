@@ -15,7 +15,6 @@ This directory must remain private at all times, accessible only to the student,
 Disclaimer: I got everything to run apart from getting the values to show on the table.
 The cells where the values should be are empty.
 Main issue: getting the inputs.
----------------------------------------------------------------------------------------
 Brief description:
 First I created a file called a4.py; a folder called templates which has formnjs.html.
 Next I imported the flask module
