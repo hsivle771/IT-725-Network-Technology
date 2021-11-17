@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>NJS Subnet Calculator</title>
+		<meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="author" content="Radim Bartos">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+		<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha384-xBuQ/xzmlsLoJpyjoggmTEz8OWUFM0/RC5BsqQBDX2v5cMvDHcMakNTNrHIW2I5f" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+	</head>
+
+	<body>
+		<div class="container">
+		<h1>Subnet Calculator</h1>
+
+		<p>Enter an IP address in the subnet and the prefix length.</p>
+
+				<form class="card card-body bg-light" id="form">
+				 <fieldset>
+				 <legend>Subnet Prefix</legend>
+				 <div class="control-group">
+				 <label class="control-label">IP address / prefix length</label>
+				 <div class="controls">
+				 <input type="number"	class="span1" id="b1" min="0" max="255" value="132" > .
+				 <input type="number"	class="span1" id="b2" min="0" max="255" value="177" > .
+				 <input type="number"	class="span1" id="b3" min="0" max="255" value="4" > .
+				 <input type="number"	class="span1" id="b4" min="0" max="255" value="32" > /
+				 <input type="number"	class="span1" id="preflen" min="0" max="30" value="22" >
+				 <p class="help-block">Enter values between 0 and 255 for the bytes of the IP
+					 address and between 0 and 30 for the prefix.</p>
+			   </div>
+				 </div>
+
+				 <div class="form-actions">
+ 					<button class="btn btn-primary">Submit</button>
+				 </div>
+				 </fieldset>
+				</form>
+
+				<div class="" id="results" style="display:none;" >
+					<fieldset><legend>Results</legend></fieldset>
+	        <table class="table table-striped table-bordered
+					 table-sm" style="margin-bottom:0px;
+					 background-color:white;">
+	          <thead>
+	            <tr><th>Description</th><th>Value</th></tr>
+	          </thead>
+	          <tbody>
+					<tr><td>Subnet address</td><td id="subnet"> </td></tr>
+					<tr><td>First host address</td><td id="first"> </td></tr>
+					<tr><td>Entered address</td><td id="entered"> </td></tr>
+					<tr><td>Last host address</td><td id="last"> </td></tr>
+					<tr><td>Subnet broadcast address</td><td id="broadcast"> </td></tr>
+					<tr><td>Netmask</td><td id="netmask"> </td></tr>
+	          </tbody>
+			    </table>
+				</div>
+		</div>
+
+		<script>
+		$("#form").submit(function(f) {
+			f.preventDefault();
+			$.ajax({
+				url: "/prefcalc",
+				data: "b1="+$('#b1').val()+"&b2="+$('#b2').val()+"&b3="+
+					$('#b3').val()+"&b4="+$('#b4').val()+"&preflen="+$('#preflen').val(),
+				type: "GET",
+				success: function(results) {
+					$("#subnet").html(results["subnet"]);
+					$("#first").html(results["first"]);
+					$("#entered").html(results["entered"]);
+					$("#last").html(results["last"]);
+					$("#broadcast").html(results["broadcast"]);
+					$("#netmask").html(results["netmask"]);
+					$("#results").show();
+				},
+				error: function(e) {
+					alert("Error: "+e.status+": "+e.statusText);
+				}
+			});
+		});
+		</script>
+	</body>
+</html>
